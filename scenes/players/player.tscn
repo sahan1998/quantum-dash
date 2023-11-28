@@ -1,3 +1,100 @@
-[gd_scene format=3 uid="uid://bqt1ik37sdfum"]
+[gd_scene load_steps=8 format=3 uid="uid://bqt1ik37sdfum"]
 
-[node name="Player" type="CharacterBody2D"]
+[ext_resource type="Texture2D" uid="uid://dqghg8fbknrca" path="res://graphics/player-sprites/player-without-helmet.png" id="1_6kk42"]
+
+[sub_resource type="Animation" id="Animation_3ivtv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [48]
+}
+
+[sub_resource type="Animation" id="Animation_po142"]
+resource_name = "begin_run"
+length = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [36]
+}
+
+[sub_resource type="Animation" id="Animation_m1s7q"]
+resource_name = "jump"
+length = 0.72
+step = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [72, 73, 74, 75, 108, 109, 144, 145, 36]
+}
+
+[sub_resource type="Animation" id="Animation_8xdgv"]
+resource_name = "running"
+length = 0.8
+loop_mode = 1
+step = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64, 0.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kdwe"]
+_data = {
+"RESET": SubResource("Animation_3ivtv"),
+"begin_run": SubResource("Animation_po142"),
+"jump": SubResource("Animation_m1s7q"),
+"running": SubResource("Animation_8xdgv")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t1v2s"]
+radius = 15.0
+height = 64.0
+
+[node name="Player1" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_6kk42")
+hframes = 12
+vframes = 21
+frame = 48
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "running"
+libraries = {
+"": SubResource("AnimationLibrary_1kdwe")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_t1v2s")
