@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqt1ik37sdfum"]
+[gd_scene load_steps=9 format=3 uid="uid://bqt1ik37sdfum"]
 
 [ext_resource type="Texture2D" uid="uid://dqghg8fbknrca" path="res://graphics/player-sprites/player-without-helmet.png" id="1_6kk42"]
+[ext_resource type="Script" path="res://scenes/players/player.gd" id="1_sihqm"]
 
 [sub_resource type="Animation" id="Animation_3ivtv"]
 length = 0.001
@@ -49,6 +50,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [72, 73, 74, 75, 108, 109, 144, 145, 36]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.72),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"run_animation"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_8xdgv"]
 resource_name = "running"
@@ -81,6 +96,8 @@ radius = 15.0
 height = 64.0
 
 [node name="Player1" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_sihqm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -96,5 +113,5 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_t1v2s")

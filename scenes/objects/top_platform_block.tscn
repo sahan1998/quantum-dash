@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnnrdsp4jixr4"]
+
+[ext_resource type="Texture2D" uid="uid://cgbe3qglf3yvr" path="res://graphics/levels/platform1.png" id="1_32gkv"]
+
+[node name="TopPlatformBlock" type="Sprite2D"]
+texture = ExtResource("1_32gkv")
+region_enabled = true
+region_rect = Rect2(41.998, 159.79, 256.998, 32.641)
+region_filter_clip_enabled = true
