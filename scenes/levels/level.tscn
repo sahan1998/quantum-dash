@@ -1,17 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuf6m5ep1it8w"]
+[gd_scene load_steps=5 format=3 uid="uid://cuf6m5ep1it8w"]
 
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_ek7ao"]
 [ext_resource type="PackedScene" uid="uid://cqu1waumw6q6b" path="res://scenes/objects/platform.tscn" id="1_rh14k"]
 [ext_resource type="PackedScene" uid="uid://bqt1ik37sdfum" path="res://scenes/players/player.tscn" id="2_88j2j"]
-[ext_resource type="Texture2D" uid="uid://d26ddxcu1xr7b" path="res://graphics/objects/wooden-box.png" id="3_25mx7"]
-[ext_resource type="Script" path="res://scenes/levels/test-objects.gd" id="3_efsfi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkr8d"]
 size = Vector2(2782, 62)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w6fn"]
-size = Vector2(42, 40)
-
 [node name="Level" type="Node2D"]
+script = ExtResource("1_ek7ao")
+metadata/_edit_horizontal_guides_ = []
 
 [node name="Area2D" type="RigidBody2D" parent="."]
 collision_layer = 2
@@ -24,69 +22,7 @@ shape = SubResource("RectangleShape2D_vkr8d")
 [node name="platform" parent="Area2D" instance=ExtResource("1_rh14k")]
 position = Vector2(0, 344)
 
-[node name="Objects" type="Node2D" parent="."]
-visible = false
-script = ExtResource("3_efsfi")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Objects"]
-position = Vector2(1203, 308)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Objects/StaticBody2D"]
-scale = Vector2(0.100502, 0.100503)
-texture = ExtResource("3_25mx7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D"]
-shape = SubResource("RectangleShape2D_2w6fn")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Objects"]
-position = Vector2(1505, 308)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Objects/StaticBody2D2"]
-scale = Vector2(0.100502, 0.100503)
-texture = ExtResource("3_25mx7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D2"]
-shape = SubResource("RectangleShape2D_2w6fn")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Objects"]
-position = Vector2(1845, 308)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Objects/StaticBody2D3"]
-scale = Vector2(0.100502, 0.100503)
-texture = ExtResource("3_25mx7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D3"]
-shape = SubResource("RectangleShape2D_2w6fn")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Objects"]
-position = Vector2(2152, 308)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Objects/StaticBody2D4"]
-scale = Vector2(0.100502, 0.100503)
-texture = ExtResource("3_25mx7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D4"]
-shape = SubResource("RectangleShape2D_2w6fn")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="Objects"]
-position = Vector2(2385, 308)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Objects/StaticBody2D5"]
-scale = Vector2(0.100502, 0.100503)
-texture = ExtResource("3_25mx7")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D5"]
-shape = SubResource("RectangleShape2D_2w6fn")
-
 [node name="Player1" parent="." instance=ExtResource("2_88j2j")]
 position = Vector2(632, 120)
+
+[connection signal="switch_sides" from="Player1" to="." method="_on_player_1_switch_sides"]

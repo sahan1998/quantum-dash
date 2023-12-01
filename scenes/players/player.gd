@@ -4,9 +4,13 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -300.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+signal switch_sides
 
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = 980
+
+func _ready():
+	pass
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -19,8 +23,10 @@ func _physics_process(delta):
 		$AnimationPlayer.play("jump")
 	
 	# Handle Dimension Swap
-	if Input.is_action_just_pressed("primary action") and is_on_floor():
+	if Input.is_action_just_pressed("primary action"):
 		$AnimationPlayer.play("portal_jump_in")
+		switch_sides.emit()
+		gravity *= -1
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
